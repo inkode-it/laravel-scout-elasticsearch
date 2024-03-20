@@ -14,6 +14,7 @@ use PhpParser\NodeFinder;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor\NameResolver;
 use PhpParser\ParserFactory;
+use PhpParser\PhpVersion;
 use Roave\BetterReflection\BetterReflection;
 use Roave\BetterReflection\Reflector\Exception\IdentifierNotFound;
 use Roave\BetterReflection\Reflector\Reflector;
@@ -116,7 +117,7 @@ final class SearchableListFactory
      */
     private function getStmts(): array
     {
-        $parser = (new ParserFactory())->create(ParserFactory::PREFER_PHP7);
+        $parser = (new ParserFactory())->createForVersion(PhpVersion::getHostVersion());
         $nameResolverVisitor = new NameResolver();
         $nodeTraverser = new NodeTraverser();
         $nodeTraverser->addVisitor($nameResolverVisitor);
